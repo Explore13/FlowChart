@@ -47,3 +47,14 @@
     height: 300px; /* Adjust for very small screens */
   }
 }
+
+
+.mermaid text {
+  max-width: 200px;
+  font-size: 25px !important;  /* Ensures text inside nodes and edges has a font size of 30px */
+  font-weight: bold;  /* Applies bold font to the labels */
+}
+.mermaid .edgeLabel {
+  font-size: 30px !important;  /* Apply font size for edge labels (arrows) */
+  font-weight: bold;
+}

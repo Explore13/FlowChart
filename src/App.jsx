@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import mermaid from "mermaid";
+import "./App.css";
 
 const App = () => {
   const mermaidRef = useRef(null);
@@ -38,6 +39,13 @@ const App = () => {
     D --> H[Value-Added Services]:::blue
     D --> I[Notifications]:::red
 
+    %% AI Layer for Battery Data Processing
+    F --> FA[AI Layer: Analyze Battery Data]:::blue
+    FA --> FB[Time Remaining Calculation]:::cyan
+    FA --> FC[Distance Can Travel Calculation]:::green
+    FA --> FD[When to Charge Analysis]:::red
+    FA --> FE[Best Charging Stations Recommendations]:::purple
+
     E --> J[Manage Listings]:::indigo
     E --> K[Booking Notifications]:::cyan
     E --> L[Earnings Insights]:::green
@@ -48,39 +56,44 @@ const App = () => {
 
     D --> P[Search Nearby Services]:::indigo
     P -->|Apply Filters| Q[Search Results]:::cyan
-    Q --> R[Booking Flow]:::blue
-    R --> S[Payment Confirmation]:::green
 
-    S --> T[Real-Time Notifications]:::red
-    T --> U[Navigation to Location]:::blue
+    %% Decision: Book Parking Slot or Parking with EV Charging
+    Q -->|Book Parking Slot Only| R[Book Parking Slot]:::blue
+    Q -->|Book Parking with EV Charging| S[Book Parking with EV Charging]:::teal
 
-    U --> V[On-Site Interaction]:::purple
-    V -->|Regular Users| W[Scan QR for Access]:::cyan
-    V -->|Homeowners| X[Manual/Auto Session Approval]:::teal
+    R --> T[Parking Slot Booking Confirmation]:::green
+    S --> U[Parking and Charging Confirmation]:::green
 
-    W --> Y[Session Monitoring]:::green
-    X --> Y
+    T --> V[Real-Time Notifications]:::red
+    U --> V
 
-    Y --> Z[Session Completion]:::gray600
-    Z --> AA[Feedback and Ratings]:::blue
-    Z --> AB[Extend Session Option]:::indigo
+    V --> W[Navigation to Location]:::blue
+  
+    W --> X[On-Site Interaction]:::purple
+    X -->|Regular Users| Y[Scan QR for Access]:::cyan
+    X -->|Homeowners| Z[Manual/Auto Session Approval]:::teal
+    Y --> AA[Session Monitoring]:::green
+    Z --> AA
 
-    AA --> AC[Regular Users: Review History]:::purple
-    AA --> AD[Homeowners: Review Earnings]:::green
+    AA --> AB[Session Completion]:::gray600
+    AB --> AC[Feedback and Ratings]:::blue
+    AB --> AD[Extend Session Option]:::indigo
+    AC --> AE[Regular Users: Review History]:::purple
+    AC --> AF[Homeowners: Review Earnings]:::green
 
-    D --> AE[Community Charging Search]:::indigo
-    AE --> AF[Book Homeowner Chargers]:::blue
-    AE --> AG[Filter by Price and Type]:::cyan
+    D --> AG[Community Charging Search]:::indigo
+    AG --> AH[Book Homeowner Chargers]:::blue
+    AG --> AI[Filter by Price and Type]:::cyan
 
-    AG --> AH[Dynamic Slot Management]:::teal
+    AI --> AJ[Dynamic Slot Management]:::teal
 
-    E --> AI[History and Insights]:::purple
-    AI --> AJ[Earnings Reports]:::green
-    AI --> AK[Ratings and Feedback]:::blue
+    E --> AK[History and Insights]:::purple
+    AK --> AL[Earnings Reports]:::green
+    AK --> AM[Ratings and Feedback]:::blue
 
-    AL[Admin Panel]:::redbg --> AM[Approve Listings]:::teal
-    AL --> AN[Manage Disputes and Cancellations]:::purple
-    AL --> AO[System Performance Monitoring]:::green
+    AN[Admin Panel]:::redbg --> AO[Approve Listings]:::teal
+    AN --> AP[Manage Disputes and Cancellations]:::purple
+    AN --> AQ[System Performance Monitoring]:::green
   `;
 
   useEffect(() => {
@@ -91,9 +104,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>User Flow Diagram</h1>
-      <div className="mermaid shadow-md" ref={mermaidRef}>
-        {diagram}
+      <div className="mermaid-container">
+        <div className="mermaid shadow-md" ref={mermaidRef}>
+          {diagram}
+        </div>
       </div>
     </div>
   );
